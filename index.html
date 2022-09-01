@@ -11,6 +11,9 @@
 <body>
   <div id="root"></div>
   <script>
+    // innerHTML
+
+    // 1
     function elem(tagName) {
       if (typeof (tagName) === "string") {
         // 매개변수 tagName은 인수로 데이터타입 "string" 일때 작동
@@ -29,6 +32,19 @@
     //`<header></header>`;
     //`<main></main>`;
     //`<footer></footer>`;
+
+    // 2
+    function makeTag(Parent, tagName, html) {
+      // 부모요소 , 추가할태그, 추가한 태그의 내용
+      if (typeof tagName === "string" && typeof html === "string") {
+
+        const tag = document.createElement(tagName);
+        // 매개변수 tagName으로 받은 인자를 생성
+        tag.innerHTML = html; // 생성한 태그에 추가할 내용 및 태그
+        Parent.appendChild(tag); // 매개변수 Parents로 받는 인수의 자식노드로 추가
+      }
+    }
+    makeTag(root, "div", "<p>children</p>") // 함수 호출
   </script>
 </body>
 
