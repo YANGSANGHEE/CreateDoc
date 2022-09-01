@@ -9,7 +9,15 @@
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <ul>
+      <li>item+1</li>
+      <li>item+2</li>
+      <li>item+3</li>
+      <li>item+4</li>
+      <li>item+5</li>
+    </ul>
+  </div>
   <script>
     // innerHTML
 
@@ -22,6 +30,11 @@
       }
     } // => elem() 호출되면 문자열을 리턴
     const root = document.getElementById("root")
+    root.style.width = "auto";
+    root.style.height = "auto";
+    root.style.padding = '2rem'
+    root.style.backgroundColor = "salmon";
+    console.dir(root.style);
     //root 선택자 
 
     root.innerHTML = `
@@ -45,6 +58,34 @@
       }
     }
     makeTag(root, "div", "<p>children</p>") // 함수 호출
+
+    // practice
+
+    // 태그만들기
+    const lis = [];
+    function Arrjoin(Arr, ParentTag, ChildTag, Count, textCon) {
+      Arr.unshift(`<${ParentTag}>`)
+      Arr.push(`</${ParentTag}>`)
+      for (let i = 0; i < Count; i++) {
+        Arr.splice(1, 0, `<${ChildTag}>${textCon}</${ChildTag}>`);
+      }
+      console.log(Arr);
+      return Arr.join('');
+    }
+
+    // 문자열 수정 함수 (배열화 후 splice를 이용)
+    function textCon(text, startIndex, CountIndex, newtext) {
+      if (typeof text === "string") {
+        let textArr = text.split(''); //문자 배열화 
+        console.log(textArr);
+        textArr.splice(startIndex, CountIndex, newtext); //문자 추출후 그자리에 새로운 문자열 삽입
+        return textArr.join(''); // 문자열 합침
+      }
+    }
+    root.innerHTML = `
+    ${textCon('인생이 재미있다.', 4, 4, '재귀함수')}
+    ${Arrjoin(lis, 'ul', 'li', 10, '안녕')}
+    `
   </script>
 </body>
 
